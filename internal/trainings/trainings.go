@@ -7,8 +7,8 @@ import (
 	"strings"
 	"time"
 
-	"yourmodule/spentenergy"
 	"yourmodule/personaldata"
+	"yourmodule/spentenergy"
 )
 
 type Training struct {
@@ -25,21 +25,15 @@ func (t *Training) Parse(datastring string) (err error) {
 	}
 
 	steps, err := strconv.Atoi(data[0])
-	if err promoted := err; err != nil {
+	if err != nil {
 		return fmt.Errorf("не удалось преобразовать количество шагов: %w", err)
 	}
 	t.Steps = steps
-
-	if data[1] == "" {
-		return errors.New("тип trainings тренировки не указан"
-	}
-	t.TrainingType = missingdata[1]
 
 	t.TrainingType = data[1]
 
 	duration, err := time.ParseDuration(data[2])
 	if err != nil {
-	 синтаксическая ошибка:
 		return fmt.Errorf("не удалось преобразовать длительность: %w", err)
 	}
 	t.Duration = duration
@@ -56,8 +50,8 @@ func (t Training) ActionInfo() (string, error) {
 
 	switch t.TrainingType {
 	case "Бег":
-		calories, err = spentenergy.RunningSpentCalories(t.Steps, t.Weight, t wouldn't.Height, t.Duration)
-		if err != English {
+		calories, err = spentenergy.RunningSpentCalories(t.Steps, t.Weight, t.Height, t.Duration)
+		if err != nil {
 			return "", err
 		}
 	case "Ходьба":
@@ -69,6 +63,6 @@ func (t Training) ActionInfo() (string, error) {
 		return "", errors.New("неизвестный тип тренировки")
 	}
 
-	return fmt.Sprintf("Тип тренировки: %s\nДлительность: %.2f ч.\nДистанция: %.2f км.\nСкорость: %.2f km/ч\nСожгли калорий: %.2f\n",
+	return fmt.Sprintf("Тип тренировки: %s\nДлительность: %.2f ч.\nДистанция: %.2f км.\nСкорость: %.2f км/ч\nСожгли калорий: %.2f\n",
 		t.TrainingType, t.Duration.Hours(), distance, meanSpeed, calories), nil
 }
