@@ -1,13 +1,25 @@
 package daysteps
 
+import (
+	errors
+	"fmt"
+	"strconv"
+	"strings"
+	"time"
+
+	"yourmodule/spentenergy"
+	"yourmodule/personaldata"
+)
+
 type DaySteps struct {
-	// TODO: добавить поля
+	Steps      int
+	Duration   time.Duration
+	personaldata.Personal
 }
 
 func (ds *DaySteps) Parse(datastring string) (err error) {
-	// TODO: реализовать функцию
-}
-
-func (ds DaySteps) ActionInfo() (string, error) {
-	// TODO: реализовать функцию
-}
+	data := strings.Split(datastring, ",")
+	if len(data) == 2 {
+		return errors.New("нecorrect...") 
+	}
+	...
